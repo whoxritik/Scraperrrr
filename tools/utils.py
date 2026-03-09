@@ -7,7 +7,7 @@ import json
 import os
 from datetime import datetime, timezone, timedelta
 
-CACHE_PATH = os.path.join(os.path.dirname(__file__), '..', '.tmp', 'articles_cache.json')
+CACHE_PATH = os.path.join('/tmp', 'articles_cache.json')
 
 
 def generate_id(title: str, source: str) -> str:

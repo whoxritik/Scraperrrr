@@ -5,7 +5,7 @@ Returns a list of article dicts matching the Output Payload schema.
 import re
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from tools.utils import generate_id, now_utc, parse_to_utc
 
 BASE_URL = "https://www.therundown.ai"
@@ -18,31 +18,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
 }
-MAX_ARTICLES = 10
-
-
-def _fetch_article_date(url: str) -> datetime | None:
-    """Attempt to fetch the publish date from an article's detail page."""
-    try:
-        resp = requests.get(url, headers=HEADERS, timeout=8)
-        if resp.status_code != 200:
-            return None
-        soup = BeautifulSoup(resp.text, 'html.parser')
-        # Look for <time> element
-        time_el = soup.find('time')
-        if time_el:
-            dt_str = time_el.get('datetime') or time_el.get_text(strip=True)
-            return parse_to_utc(dt_str)
-        # Look for meta published date
-        for meta in soup.find_all('meta'):
-            prop = meta.get('property', '') or meta.get('name', '')
-            if 'publishe' in prop.lower() or 'date' in prop.lower():
-                content = meta.get('content', '')
-                if content:
-                    return parse_to_utc(content)
-    except Exception:
-        pass
-    return None
+MAX_ARTICLES = 5  # Reduced to stay within Vercel's serverless timeout budget
 
 
 def scrape() -> dict:
@@ -100,12 +76,8 @@ def scrape() -> dict:
 
             links_tried += 1
 
-            # Try to get exact publish date from article page
-            published_at = _fetch_article_date(url)
-
-            # If no date found, assume it's recent (within 24h) — we cap at 10 articles
-            if published_at is None:
-                published_at = now_utc()
+            # Use current time as published_at (avoids per-article HTTP requests that cause timeouts)
+            published_at = now_utc()
 
             article = {
                 "id": generate_id(title, SOURCE_NAME),
