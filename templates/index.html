@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Pulse — Live AI News Dashboard</title>
+  <meta name="description" content="Beautiful real-time AI news dashboard. Latest articles from Ben's Bites and The Rundown, updated every 24 hours." />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══════════════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════════════ -->
+  <aside class="sidebar" role="navigation" aria-label="Main navigation">
+
+    <!-- Brand Logo -->
+    <div class="sidebar-logo" title="AI Pulse">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 400 400" fill="none">
+        <path fill="currentColor" d="M371.373 183.345H195.799c-6.746 0-12.214 5.458-12.214 12.191v42.666c0 6.733 5.468 12.191 12.214 12.191h177.072c5.616 0 10.285 4.316 10.716 9.905v110.476c0 6.732 5.468 12.19 12.214 12.19h41.985c6.746 0 12.214-5.458 12.214-12.19V262.583c0-6.732-5.468-12.19-12.214-12.19h-41.222c-7.167 0-12.977-5.799-12.977-12.953v-41.904c0-6.733-5.468-12.191-12.214-12.191Z"/>
+        <path fill="currentColor" d="M317.942 371.524v-42.667c0-6.732-5.468-12.19-12.214-12.19H163.742c-26.139 0-47.329-21.15-47.329-47.238V135.333c0-10.099 8.202-18.285 18.321-18.285h235.88c6.746 0 12.214-5.458 12.214-12.191V62.191c0-6.733-5.468-12.191-12.214-12.191H135.497C88.278 50 50 88.205 50 135.333v135.889a109.605 109.605 0 0 0 32.196 77.579L183.59 450v-54.095c0-6.733 5.469-12.191 12.214-12.191h109.925c6.746 0 12.214-5.458 12.214-12.19Z"/>
+      </svg>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Nav Items -->
+    <nav id="main-nav">
+      <div class="nav-item active" data-nav="home" title="Home Feed">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </div>
+      <div class="nav-item" data-nav="saved" id="saved-nav-btn" title="Saved Articles">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      </div>
+      <div class="nav-item" data-nav="sources" title="Sources">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="nav-item" data-nav="settings" title="Settings">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+    </nav>
+
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN AREA
+  ════════════════════════════════════════════════ -->
+  <div class="main">
+
+    <!-- ─── Header ────────────────────────────────── -->
+    <header class="header">
+      <h1 class="header-title">AI <span>Pulse</span></h1>
+      <span style="color:var(--text-muted);font-size:13px;font-weight:400;">Live News Dashboard</span>
+
+      <div class="header-spacer"></div>
+
+      <!-- Source Status Indicators -->
+      <div class="source-status-row" id="source-statuses">
+        <span class="source-status loading">⏳ Loading sources...</span>
+      </div>
+
+      <!-- Last Updated Badge -->
+      <div class="header-badge loading" id="last-updated-badge">
+        <span class="dot"></span>
+        <span>Loading...</span>
+      </div>
+
+      <!-- Refresh Button -->
+      <button class="btn btn-primary" id="refresh-btn" title="Force refresh all sources">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        Refresh
+      </button>
+    </header>
+
+    <!-- ─── Scrollable Content ─────────────────────── -->
+    <main class="content" id="main-content">
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon purple">📰</div>
+          <div class="stat-info">
+            <span class="stat-label">Articles Today</span>
+            <span class="stat-value" id="stat-total">—</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">❤️</div>
+          <div class="stat-info">
+            <span class="stat-label">Saved</span>
+            <span class="stat-value" id="stat-saved">0</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-info">
+            <span class="stat-label">Sources Live</span>
+            <span class="stat-value" id="stat-sources">—</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">🕐</div>
+          <div class="stat-info">
+            <span class="stat-label">Last Refresh</span>
+            <span class="stat-value" style="font-size:15px;font-weight:600" id="stat-fresh">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stale Data Banner -->
+      <div class="stale-banner" id="stale-banner">
+        ⚠️ Showing cached data — no new articles found in last 24h. Hit Refresh to check again.
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-pill active" data-filter="all" id="filter-all">
+          All
+          <span class="count">0</span>
+        </button>
+        <button class="filter-pill" data-filter="bens" id="filter-bens">
+          🍪 Ben's Bites
+          <span class="count">0</span>
+        </button>
+        <button class="filter-pill" data-filter="rundown" id="filter-rundown">
+          📰 The Rundown
+          <span class="count">0</span>
+        </button>
+        <button class="filter-pill disabled" data-filter="reddit" id="filter-reddit" title="Reddit — coming soon">
+          🤖 Reddit
+          <span class="count" style="font-size:10px">Soon</span>
+        </button>
+      </div>
+
+      <!-- Articles Section -->
+      <div>
+        <div class="section-header" style="margin-bottom: 14px;">
+          <h2 class="section-title">Latest Articles</h2>
+          <span class="section-sub" id="articles-subtitle">Last 24 hours</span>
+        </div>
+
+        <div class="articles-grid" id="articles-grid" role="list" aria-label="Article feed">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /main -->
+
+</div><!-- /app -->
+
+<!-- ═══════════════════════════════════════════════
+     SAVED ARTICLES DRAWER
+════════════════════════════════════════════════ -->
+<div class="drawer-overlay" id="drawer-overlay" role="dialog" aria-modal="true" aria-label="Saved Articles"></div>
+<div class="drawer" id="saved-drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-title">Saved Articles</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:2px">
+        <span id="drawer-count">0</span> article<span id="drawer-plural">s</span> saved
+      </div>
+    </div>
+    <button class="drawer-close" id="drawer-close" aria-label="Close drawer">✕</button>
+  </div>
+  <div class="drawer-body" id="drawer-body">
+    <!-- Populated by app.js -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TOAST CONTAINER
+════════════════════════════════════════════════ -->
+<div class="toast-container" id="toast-container" role="status" aria-live="polite"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
