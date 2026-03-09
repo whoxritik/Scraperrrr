@@ -27,7 +27,7 @@ def scrape() -> dict:
     Returns: { "articles": [...], "source": "The Rundown", "error": None }
     """
     try:
-        resp = requests.get(BASE_URL, headers=HEADERS, timeout=10)
+        resp = requests.get(BASE_URL, headers=HEADERS, timeout=7)
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, 'html.parser')
 
